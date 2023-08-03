@@ -57,4 +57,86 @@ sequenceDiagram
 ## [HTML](https://magazine.techacademy.jp/magazine/4843)
 ## [HTML2](https://magazine.techacademy.jp/magazine/4808)
 ## [Vue.js](https://reffect.co.jp/vue/beginner-vue/)
+### Vue.jsとは
+Webサイト、アプリケーションを利用するユーザに対してインタラクティブなUIを提供したいときに利用できる
+JavaScriptフレームワーク
+今回は**Vite**を使う。Vue.jsを開発する際に元になるプロジェクトを作成することができるツールを使う
+Vue.js側は現在、新規でプロジェクトを作成する際にはVue CLIではなく、Viteを利用することを推奨している
+今後はプロジェクト作成ツールは Vite をベースに開発が行われていくよう。
+ViteでVue.jsのプロジェクト作成するコマンド：`npm init vite@latest . -- --template vue`
+
+`index.html`:最初にブラウザから開発サーバにアクセスすると表示されるのがプロジェクトフォルダ直下にあるhtml ファイル
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+`main.js`
+```javascript
+import { createApp } from 'vue';
+import './style.css';
+import App from './App.vue';
+
+createApp(App).mount('#app');
+```
+1. vue から createApp 関数を import
+2. import した createApp 関数を利用して Vue.js のインスタンス
+3. インスタンスを作成する際には引数に App.vue ファイルから import した App を指定(App.vue ファイルには見慣れない vue という拡張子)
+    拡張子 vue は App.vue ファイルが Vue.js のフォーマットでコードが記述されていることを表しておりこの拡張子を見て内部で適切な処理が行われる。
+    vue ファイルの中には Vue.js 特有のフォーマットで中身を記述する必要がある。
+4. createApp でインスタンスを作成した後は mount メソッドを実行しています。
+    mount メソッドの引数に指定しているのが index.html ファイルに記述されている div 要素の id 属性の app です。
+    mount メソッドの処理で id 属性に app を持つ div 要素の中に App.vue ファイルに記述された内容を挿入しています。
+    mount の引数の文字列を#app から別の文字列に変更することは可能ですが
+    変更した場合は index.html ファイルの id 属性も同じ名前に変更する必要があります。
+
+`App.vue`
+```vue
+<script setup>
+  // This starter template is using Vue 3 <script setup> SFCs
+  // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+  import HelloWorld from './components/HelloWorld.vue';
+</script>
+
+<template>
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+  <HelloWorld msg="Vite + Vue" />
+</template>
+
+<style scoped>
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.vue:hover {
+    filter: drop-shadow(0 0 2em #42b883aa);
+  }
+</style>
+```
+
+
+
+
 ## [JavaScript](https://jsprimer.net/basic/introduction/)
