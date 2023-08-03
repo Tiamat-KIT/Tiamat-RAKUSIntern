@@ -53,3 +53,8 @@ sequenceDiagram
 - リクエストに応じたファイルを読み込んで内容を返す
 
 これができればよいということ
+
+## [HTML](https://magazine.techacademy.jp/magazine/4843)
+## [HTML2](https://magazine.techacademy.jp/magazine/4808)
+## [Vue.js](https://reffect.co.jp/vue/beginner-vue/)
+## [JavaScript](https://jsprimer.net/basic/introduction/)
