@@ -38,7 +38,6 @@ Webブラウザでは、URLを受け取ると、
 
 URLとして接続先ホスト名の後に何も書いていない場合は自動的に末尾に`/`が補われ、
 `http://example.com/`として扱われるようになっている。 例えば、今回のケースであれば、`http://example.com`が該当する
-![image](https://github.com/Tiamat-KIT/Tiamat-RAKUSIntern/assets/100649020/f07348ad-7fdf-436b-bfd3-1beb8f66202c)
 
 ```mermaid
 sequenceDiagram
