@@ -102,7 +102,7 @@ createApp(App).mount('#app');
     変更した場合は index.html ファイルの id 属性も同じ名前に変更する必要があります。
 
 `App.vue`
-```vue
+```javascript
 <script setup>
   // This starter template is using Vue 3 <script setup> SFCs
   // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
@@ -135,8 +135,111 @@ createApp(App).mount('#app');
   }
 </style>
 ```
+App.vueは以下のタグで分けられた3つのパートに分けられている
+- `<script>`に`import`文を書いて他のvueファイルからコンポーネントを引っ張ってきたりなどのJavaScriptを書く。
+- `<template>`にJSX文（`<body>`部分のHTML）を書く
+- `<style>`部分にCSSを書く。
 
+`HelloWorld.vue`
+```javascript
+<script setup>
+  import {ref} from "vue"
 
+  defineProps({
+    msg: String
+  })
+</script>
 
+<template>
+  <h1>{{msg}}</h1>
+  <div class="card">
+    <button type="button" @click="count++">
+      count is {{count}} 
+    </button>
+    <p>Edit <code>components/HelloWorld.vue</code>to test HMR</p>
+  </div>
+
+  <p>
+    Check Out 
+    <a 
+      href="https://vuejs.org/guide/quick-start.html#local"
+      target="_blank">
+      create-vue
+    </a>
+    , the official Vue + Vite starter
+  </p>
+  <p>
+    Install
+    <a 
+      href="https://github.com/johnsoncodehk/volar"  　 　　 target="_blank">
+      Volar
+    </a>
+    in your IDE for a better DX
+  </p>
+  <p class="read-the-docs">
+    Click on the Vite and Vue logos to learn more
+  </p>
+</template>
+<style scoped>
+.read-the-docs {
+  color: #888;
+}
+</style>
+```
+vueという拡張子のついたファイルを**シングルファイルコンポーネント**
+ファイル（SFC）という。
+Vue.jsではcreateAppで指定されていたAppコンポーネントをルートコンポーネントとして他のコンポーネントをimportすることでアプリケーションを構築していく。
+Appコンポーネントに全処理を記述するよりコードを肥大化させないように
+メンテナンスも大変になることを避けるため、コンポーネントを機能・役割ごとに分割していくことでコンポーネントが再利用できるようになり、コード保守も楽になる。したがって**コンポーネントはツリーのような構造**になる
+
+Vue.jsを使うことによって、インタラクティブな機能を持ったコンテンツをカンタンに実装可能
+
+#### `<script>`タグの中にsetupという文字列がある理由
+Vue.jsのコード(Composition API)の記述を楽するために必要な設定
+これを消すとVue.jsを利用したコードが動かなくなる。
+
+#### `{{}}`（マスタッシュ）の利用
+これを使うと、変数や関数の戻り値などをHTML上に表示できるようになります。
+三項演算子を用いた処理を実行することも
+
+#### `v-text`ディレクティブ
+Vue.jsではtemplateタグ内の要素に対してVue.jsが持つ特別な属性
+`v-xxx(xxxには属性名)`を設定することで設定した要素に対して特別な
+機能を追加することが可能。
+`v-text`を使うと、`v-text`に設定した変数の内容をブラウザに表示させられる。
+
+つまり、
+- マスタッシュを使った変数の内容の表示`<p>{{ message }}</p>`
+- `v-text`に変数を文字列で指定する`<p v-text="message"></p>`
+
+また、`v-text`で設定したタグ内に文字を入力するエラーが発生するので、
+自己終了タグを使うのが良い
+
+#### `v-html`ディレクティブ
+変数にhtmlタグを含めるとそのタグをブラウザ上でタグとして認識させられる。
+```javascript
+<script setup>
+  const message = '<h2>Hello World</h2>';
+</script>
+
+<template>
+  <div v-html="message"></div>
+</template>
+```
+
+上記の処理を記述した際、ブラウザはこれを
+```html
+<div>
+  <h2>Hello World</h2>
+</div>
+```
+と解釈する
+
+#### `<script>`タグ内でのアロー関数の直接実行
+`<script>`タグ内で直接の関数の実行が可能。
+このタグの中身は自動実行される。
+
+### Binding(バインディング)
+`v-bind`ディレクティブを利用することで、`html`タグの属性の設定を行うことができる。
 
 ## [JavaScript](https://jsprimer.net/basic/introduction/)
