@@ -241,5 +241,79 @@ Vue.jsではtemplateタグ内の要素に対してVue.jsが持つ特別な属性
 
 ### Binding(バインディング)
 `v-bind`ディレクティブを利用することで、`html`タグの属性の設定を行うことができる。
+`v-bind`ディレクティブを利用してhref属性を設定する場合は以下のように記述する
+```html
+<a v-bind:href="変数名">リンク名</a>
+```
 
+実装例として、変数linkを定義して、GoogleのURLを設定
+
+```html
+<script setup>
+  const link = 'https://google.com';
+</script>
+
+<template>
+  <h1>Vue 3 入門</h1>
+  <div>
+    <a v-bind:href="link">Google</a>
+  </div>
+</template>
+```
+※ここからはすべてv-bind:の省略型の:(コロン)を利用
+
+#### class属性
+##### `v-bind`を使ったclass適用（オブジェクト利用）
+オブジェクトのプロパティにclass名を設定し、値に変数名または
+true,falseを利用することでclassを適用するかどうかを設定することができる。
+変数名を true に設定した場合は class が適用され false に設定した場合は適用されない
+※v-bindを利用してclassを設定する理由は、動的に適用するclassを変更できるようにするため
+`v-bind:class="{class名: 変数名 or (true or false)}"`
+上記のように記述する
+
+記述例
+```html
+<script setup>
+  const isActive = false;
+</script>
+
+<template>
+  <h1>Vue 3 入門</h1>
+  <p>:class="{ active: isActive }">v-bindの設定方法の確認</p>
+</template>
+```
+
+- 通常のclassとバインディングclassを設定
+通常のclass指定とバインディングclass指定は共存させられる。
+常時適用させたいclassは通常のclass指定、
+動的な変更が必要な場合は`v-bind`を利用したclass指定
+`<p class="underLine" :class="{ active: isActive }">`
+
+underLine と active クラスを isActive が true の場合に適用したい場合には下記のように記述
+`<p :class="{ 'underLine active': isActive }">`
+
+`v-bind`ディレクティブを設定したclassの中に、
+複数のclassを設定可能
+`<p class="underLine" :class="{ active: isActive, back: isBlack }">`
+
+`<p :class="{ 'underLine active': isActive, back: isBlack }">`
+
+三項演算子を活用した例
+`<p :class="isActive ? 'active' : 'underLine'">`
+
+変数内文字列展開
+`  <p :class="isActive">`
+
+配列で複数のクラスを適用
+` <p :class="[isActive, isBlack]">`
+
+配列内でオブジェクト利用
+`<p :class="[{ active: 'isActive' }, isBlack]">`
+
+配列内で演算子利用
+`<p :class="[isActive && 'active', isBlack]">`
+`<p :class="[isActive ? 'active' : 'underLine', isBlack]">`
+
+
+- 
 ## [JavaScript](https://jsprimer.net/basic/introduction/)
