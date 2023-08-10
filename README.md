@@ -313,6 +313,127 @@ underLine と active クラスを isActive が true の場合に適用したい�
 `<p :class="[isActive && 'active', isBlack]">`
 `<p :class="[isActive ? 'active' : 'underLine', isBlack]">`
 
+#### style属性の設定
+style属性の場合もclass同様に複数の記述方法を持つ。
+inlineでオブジェクトを利用して府k数のプロパティ設定を行うことができる、
+変数の内容を展開する例
+`<p :style="{ color: activeColor, fontWeight: fontStress }">
 
-- 
+上記例ではキャメルケースになっているが、
+通常のstyleプロパティを利用した場合は、シングルクォーテーションを利用する
+`<p :style="{ color: activeColor, 'font-weight': fontStress }">`
+
+変数側にstyleオブジェクトを設定する
+```html
+<script setup>
+    const styleObject = {
+        color: "red",
+        fontWeight: 900,
+    }
+</script>
+
+<template>
+    <p :style="styleObject">
+</template>
+```
+変数側に通常のstylea属性のように記述することもできる
+```html
+<script setup>
+    const styleObject = "color:red;font-weight:900"
+</script>
+<template>
+    <p :style="styleObject">
+</template>
+```
+### 条件分岐 
+`v-if`ディレクティブを利用することで要素単位または分六単位で表示非表示、または内容変更ができる。
+`v-if`と共に、`v-else-if`,`v-else`ディレクティブを利用できる。
+条件分岐のディレクティブは下記の記述で利用できる
+`<div v-if="条件式">内容</div>`
+`<div v-else-if="条件式">内容</div>`
+`<div v-else>内容</div>`
+
+活用例
+- 特定の変数に値が入ってる場合に表示
+```html
+<script setup>
+  const error = 'エラー発生';
+</script>
+
+<template>
+  <div>v-if="error">{{ error }}</div>
+</template>
+```
+条件式には変数の値をtrue,falseのbooleanを利用することもできる。
+```html
+<script setup>
+  const error = true;
+</script>
+
+<template>
+  <div>v-if="error">エラーが発生しています。</div>
+</template>
+```
+
+- エラーが起きていない場合の表示を行いたいとき(2つの分岐)
+```html
+<script setup>
+  const error = '';
+</script>
+
+<template>
+  <div v-if="error">{{ error }}</div>
+  <div v-else>エラーはありません。</div>
+</template>
+```
+
+- 表示内容を複数の分岐で変えたいとき
+```html
+<script setup>
+  const stock = 0;
+</script>
+
+<template>
+  <div v-if="stock > 5">まだ商品に在庫数に余裕があります</div>
+  <div v-else-if="stock === 0">申し訳ございません。現在売り切れです。</div>
+  <div v-else>在庫数が少なくなっています。お急ぎください。</div>
+</template>
+```
+※`v-if`と`v-if`は1つしか利用できないが、`v-else-if`は条件の数によって増やすことができる
+
+- 条件によって表示内容を変える。
+`v-if`ディレクティブが設定されている要素だけではなく、
+その中にさらに要素を含むより大きな単位で表示の内容を切り替える
+
+```html
+<div v-if="user">
+  <div>...</div>
+  <div>
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+```
+#### `v-show`による制御
+`v-if`ディレクティブに似たものに`v-show`ディレクティブがある。
+`v-if`では条件式を利用することで表示・非表示だけではなく、表示する内容を変更することができた
+`v-show`には、`v-else-if`などを一緒に利用するディレクティブは存在しない。
+条件によって表示・非表示のみ制御を行う。
+`<div v-show="条件式">内容</div>`
+error変数の値がtrueの場合は内容が表示され、falseの場合には内容が表示されることはない
+```html
+<script setup>
+  const error = true;
+</script>
+
+<template>
+  <div v-show="error">エラーが発生しています。</div>
+</template>
+```
+
+#### `v-if`と`v-show`の違い
+非表示の方法が`v-if`,`v-show`で異なるが、では`v-show`を利用するメリットは何なのでしょうか
+`v-show`のdisplayのnone,blockの切り替えは`v-if`による要素の追加、削除より処理の負荷が低いため。
+
+
 ## [JavaScript](https://jsprimer.net/basic/introduction/)
