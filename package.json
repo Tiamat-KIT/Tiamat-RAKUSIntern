@@ -1,9 +1,0 @@
-{
-  "devDependencies": {
-    "vite-tsconfig-paths": "^4.2.0"
-  },
-  "dependencies": {
-    "@types/node": "^20.5.0",
-    "vue-router": "^4.2.4"
-  }
-}

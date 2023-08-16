@@ -19,6 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
     "baseUrl": ".",
     "paths": {
       "@":[
@@ -35,3 +36,6 @@
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
+
+// https://ja.vuejs.org/guide/typescript/overview.html
