@@ -1,7 +1,11 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from "./App.vue"
+import './assets/main.css'
 
-// https://teratail.com/questions/5tvqmq0aa6cg4u
-// これでApp.vueからの型宣言エラーを解消
-createApp(App).mount('#app')
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
